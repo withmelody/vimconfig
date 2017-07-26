@@ -125,8 +125,7 @@ map <F5> :NERDTreeToggle<CR>
 map <F6> :BufExplorer<cr>
 map <F7> :SrcExplToggle<CR>
 map <F8> :TlistToggle<CR>
-map <F9> :SemanticHighlight<CR>
-map <F10> :SemanticHighlightRevert<CR>
+map <F9> :SemanticHighlightToggle<CR>
 
 "=====  PageUP PageDown
 map <PageUp> <C-U><C-U>
