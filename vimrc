@@ -15,13 +15,13 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+call vundle#begin('~/.vim/bundle')
 
 " let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+" required!
+Plugin 'gmarik/vundle'
 
-Bundle 'snipMate'
+"Bundle 'snipMate'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'The-NERD-tree'
@@ -35,22 +35,75 @@ Bundle 'cscope_macros.vim'
 Bundle 'gtags.vim'
 Bundle 'OmniCppComplete'
 Bundle 'armasm'
-Bundle 'https://github.com/dhruvasagar/vim-table-mode.git'
-"주석달기: \cc, \cn, \cs
-"다른모양 주석 설정: \ca
-"주석해제: \c<space>
+"Bundle 'https://github.com/dhruvasagar/vim-table-mode.git'
+""주석달기: \cc, \cn, \cs
+""다른모양 주석 설정: \ca
+""주석해제: \c<space>
 Bundle 'The-NERD-Commenter'
 Bundle 'AutoComplPop'
-"Bottom Bar
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-"Git Plugin
-Bundle 'tpope/vim-fugitive'
-"Bundle 'klen/python-mode'
-"Android lint
-Bundle 'hsanson/vim-android'
-Plugin 'jaxbot/semantic-highlight.vim'
+""Bottom Bar
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+""Git Plugin
+"Bundle 'tpope/vim-fugitive'
+""Bundle 'klen/python-mode'
+""Android lint
+"Bundle 'hsanson/vim-android'
+"Bundle 'jaxbot/semantic-highlight.vim'
+call vundle#end()
 
 filetype plugin indent on     " required!
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+"call plug#begin('~/.vim/plugged')
+
+"" Make sure you use single quotes
+
+"" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"Plug 'junegunn/vim-easy-align'
+
+"" Any valid git URL is allowed
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+"" Multiple Plug commands can be written in a single line using | separators
+""Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+"" On-demand loading
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+"" Using a non-master branch
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+"" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' }
+
+"" Plugin options
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+"" Plugin outside ~/.vim/plugged with post-update hook
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+"" Unmanaged plugin (manually installed and updated)
+"Plug '~/my-prototype-plugin'
+
+"Plug 'git://github.com/wesleyche/SrcExpl.git'
+"Plug 'https://github.com/dhruvasagar/vim-table-mode.git'
+""Bottom Bar
+"Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+""Git Plugin
+"Plug 'tpope/vim-fugitive'
+"Plug 'klen/python-mode'
+"Plug 'jaxbot/semantic-highlight.vim'
+
+"Plug 'tpope/vim-pathogen'
+"Plug 'w0rp/ale'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'Valloric/YouCompleteMe'
+
+"call plug#end()
 
 "====================================================
 "= 어셈블리 파일을 C처럼 인식하여 주석을 달기 위한 트릭
@@ -106,30 +159,37 @@ set laststatus=2
 "====================================================
 "= gtags.vim 설정
 "====================================================
-nmap <C-F2> :copen<CR>
-nmap <C-F4> :cclose<CR>
-nmap <C-F5> :Gtags<SPACE>
-nmap <C-F6> :Gtags -f %<CR>
-nmap <C-F7> :GtagsCursor<CR>
-nmap <C-F8> :Gozilla<CR>
-nmap <C-n> :cn<CR>
-nmap <C-p> :cp<CR>
-nmap <C-\><C-]> :GtagsCursor<CR>
+"nmap <C-F2> :copen<CR>
+"nmap <C-F4> :cclose<CR>
+"nmap <C-F5> :Gtags<SPACE>
+"nmap <C-F6> :Gtags -f %<CR>
+"nmap <C-F7> :GtagsCursor<CR>
+"nmap <C-F8> :Gozilla<CR>
+"nmap <C-n> :cn<CR>
+"nmap <C-p> :cp<CR>
+"nmap <C-\><C-]> :GtagsCursor<CR>
 
 "====================================================
 "= 키맵핑
 "====================================================
 " <F3> 이전 정의로 이동 (SrcExpl 플러그인이 설정)
 " <F4> 다음 정의로 이동 (SrcExpl 플러그인이 설정)
-map <F5> :NERDTreeToggle<CR>
-map <F6> :BufExplorer<cr>
-map <F7> :SrcExplToggle<CR>
-map <F8> :TlistToggle<CR>
-map <F9> :SemanticHighlightToggle<CR>
-
+"$ cscope -Rb # making index file
+nmap <F5> :NERDTreeToggle<CR>
+nmap <F6> :BufExplorer<cr>
+nmap <F7> :SrcExplToggle<CR>
+nmap <F8> :TlistToggle<CR>
+nmap <F9> :SemanticHighlightToggle<CR>
+":cs find c - 콜러 찾기
+nmap <F10> :cs find c <C-R><C-W><CR>
+":cs find s - 심볼 찾기
+nmap <F11> :cs find e <C-R><C-W><CR>
+nmap <C-F11> :ptj <C-R><C-W><CR>
+":cs find e - grep
+nmap <F12> :cs find s <C-R><C-W><CR>
 "=====  PageUP PageDown
-map <PageUp> <C-U><C-U>
-map <PageDown> <C-D><C-D>
+nmap <PageUp> <C-U><C-U>
+nmap <PageDown> <C-D><C-D>
 
 "===== Vim 내의 창 크기 조절
 nmap <s-h> <C-W><
@@ -139,9 +199,9 @@ nmap <s-l> <C-W>>
 
 "===== Vim 내에서 창 간 이동
 nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j 
-nmap <c-k> <c-w>k 
-nmap <c-l> <c-w>l 
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
 
 "===== 버퍼간 이동
 map ,x :bn!<CR>	  " Switch to Next File Buffer
@@ -160,10 +220,32 @@ map ,9 :b!9<CR>	  " Switch to File Buffer #9
 map ,0 :b!0<CR>	  " Switch to File Buffer #0
 
 "===== gtags.vim
-nmap <C-n> :cn<CR>
-nmap <C-p> :cp<CR>
-nmap <C-\><C-]> :GtagsCursor<CR>
+"nmap <C-n> :cn<CR>
+"nmap <C-p> :cp<CR>
+"nmap <C-\><C-]> :GtagsCursor<CR>
 
+"===== Lint
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_list_select_completion = ['', '']
+let g:ycm_key_list_previous_completion = ['', '']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_warning_symbol = '>*'
+"nnoremap g :YcmCompleter GoTo "
+"nnoremap gg :YcmCompleter GoToImprecise
+"nnoremap d :YcmCompleter GoToDeclaration
+"nnoremap t :YcmCompleter GetType
+"nnoremap p :YcmCompleter GetParent
+
+"execute pathogen#infect()
+"if has('syntax')
+    "syntax on
+"endif
+
+"au Bufenter *.\(java\|aidl\|xml\|bb\|bbappend\|yaml\|cc\|cpp\|json\) set et set cino+=g2 set cb=unnamed set stl=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
+
+packloadall
+silent! helptags ALL
 
 
 "===== make
@@ -279,7 +361,7 @@ function! LoadCscope()
   endif
 endfunction
 au BufEnter /* call LoadCscope()
- 
+
 "현재 디렉토리부터 root 디렉토리까지 tags를 찾는다.
 set tags=tags;/
 
