@@ -1,0 +1,239 @@
+set -g prefix C-a
+unbind C-b
+
+# make copy & paste keys vi style
+setw -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection     # Begin selection in copy mode.
+bind-key -t vi-copy 'C-v' rectangle-toggle  # Begin selection in copy mode.
+bind-key -t vi-copy 'y' copy-selection      # Yank selection in copy mode.
+
+# Solarized colorscheme/theme from
+#source "$HOME/.tmux/tmux-colors-solarized/tmuxcolors-dark.conf"
+
+#set -g renumber-windows on
+
+set-window-option -g alternate-screen on
+
+# I'm a Vim user, this makes navigation easier
+
+setw -g mode-keys vi
+set -g status-keys vi
+
+unbind-key j
+bind-key j select-pane -D
+unbind-key k
+bind-key k select-pane -U
+unbind-key h
+bind-key h select-pane -L
+unbind-key l
+bind-key l select-pane -R
+
+bind m last-window
+
+bind-key -r C-h resize-pane -L 5
+bind-key -r C-j resize-pane -D 5
+bind-key -r C-k resize-pane -U 5
+bind-key -r C-l resize-pane -R 5
+
+#
+set -g history-limit 10000
+# '0' is at the wrong end of the keyboard
+set -g base-index 1
+set -g pane-base-index 1
+
+# Just click it
+#set-option -g mouse-select-pane on
+#set-option -g mouse-select-window on
+#set-option -g mouse-resize-pane on
+
+unbind p
+bind p paste-buffer
+bind -t vi-copy v begin-selection
+bind -t vi-copy y copy-selection
+
+# and select text for copying with the mouse
+#setw -g mode-mouse on
+set -g mouse-utf8 on # apply to newer version instead of above
+
+# I like to give my windows descriptive names
+set-window-option -g automatic-rename off
+
+# Toggle sending keystrokes to all panes in a window
+bind-key a set-window-option synchronize-panes
+
+# Don't lose track of SSH_AGENT etc. from parent environment.
+set -g update-environment -r
+
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+bind = split-window -h
+bind - split-window -v
+
+set-option -g status on
+set-option -g status-interval 2
+
+set-option -g status-utf8 on
+set -g utf8
+set-window-option -g utf8 on
+
+set-option -g status-justify "centre"
+#set-option -g status-left-length 60
+set-option -g status-right-length 150
+#set-option -g status-left "#(~/tmux/tmux-powerline/powerline.sh left)"
+set -g status-left 'Burning:) '
+#set-option -g status-right "#(~/tmux/tmux-powerline/powerline.sh right)"
+set -g status-right '#(cut -d " " -f 1-4 /proc/loadavg) // %Y-%m-%d %H:%M:%S'
+# Notifying if other windows has activities
+
+setw -g monitor-activity on
+set -g visual-activity on
+
+set -g set-titles on
+set -g set-titles-string '#h > #W'
+
+setw -g clock-mode-colour red
+setw -g clock-mode-style 24
+
+#### COLOUR (Solarized 256)
+
+#######black
+#set-option -g status-bg colour235 #base02
+#set-option -g status-fg colour248 #yellow
+
+#set-window-option -g window-status-fg colour241 #base0
+#set-window-option -g window-status-bg colour235
+#
+#set-window-option -g window-status-activity-attr bold
+#set-window-option -g window-status-activity-fg colour241
+#set-window-option -g window-status-activity-bg colour235
+#
+#set-window-option -g window-status-current-fg colour166 #orange
+#set-window-option -g window-status-current-bg colour235
+#
+#set-window-option -g window-status-current-attr bright
+#
+## pane border
+#set-option -g pane-border-fg colour235 #base02
+#set-option -g pane-active-border-fg colour1 #base01
+
+# message text
+#set-option -g message-bg colour235 #base02
+#set-option -g message-bg colour255 #base02
+#set-option -g message-fg colour166 #orange
+
+# pane number display
+#set-option -g display-panes-active-colour red #blue
+#set-option -g display-panes-colour colour166 #orange
+#
+# clock
+#set-window-option -g clock-mode-colour colour64 #green
+####################### black end
+
+########### White
+
+set-option -g status-bg colour255 #base02
+set-option -g status-fg colour0 #yellow
+
+set-window-option -g window-status-fg colour0 #base0
+set-window-option -g window-status-bg colour255
+
+set-window-option -g window-status-activity-attr bold
+set-window-option -g window-status-activity-fg colour0
+set-window-option -g window-status-activity-bg colour255
+
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg colour255
+
+set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour1 #base01
+
+# message text
+set-option -g message-bg colour255 #base02
+set-option -g message-fg colour166 #orange
+
+# pane number display
+set-option -g display-panes-active-colour red #blue
+set-option -g display-panes-colour colour166 #orange
+
+# clock
+set-window-option -g clock-mode-colour colour64 #green
+#
+######################## White end
+
+# zenburn start
+
+#set-option -g status-bg colour237 #base02
+#set-option -g status-fg colour251 #yellow
+
+# default window title colors
+#set-window-option -g window-status-fg colour241 #base0
+#set-window-option -g window-status-bg colour237
+
+#set-window-option -g window-status-attr dim
+
+# activity title
+#set-window-option -g window-status-activity-attr bold
+#set-window-option -g window-status-activity-fg green
+#set-window-option -g window-status-activity-bg colour0
+
+# active window title colors
+#set-window-option -g window-status-current-fg colour166 #orange
+#set-window-option -g window-status-current-bg colour237
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+#set-option -g pane-border-fg colour237 #base02
+#set-option -g pane-border-fg colour251 #base02
+#set-option -g pane-active-border-fg colour1 #base01
+
+# message text
+#set-option -g message-bg colour237 #base02
+#set-option -g message-fg colour166 #orange
+
+# pane number display
+#set-option -g display-panes-active-colour red #blue
+#set-option -g display-panes-colour colour166 #orange
+
+# clock
+#set-window-option -g clock-mode-colour colour64 #green
+# zenburn end
+
+################Solarized Start
+#### COLOUR (Solarized 256)
+#
+#set-option -g status-bg colour0 #base02
+#set-option -g status-fg colour136 #yellow
+#set-option -g status-attr default
+
+## default window title colors
+#set-window-option -g window-status-fg colour244 #base0
+#set-window-option -g window-status-bg colour0
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+#set-window-option -g window-status-current-fg colour166 #orange
+#set-window-option -g window-status-current-bg colour0
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+#set-option -g pane-border-fg colour166 #base02
+#set-option -g pane-active-border-fg colour0 #base01
+
+# message text
+#set-option -g message-bg colour0 #base02
+#set-option -g message-fg colour166 #orange
+
+# pane number display
+#set-option -g display-panes-active-colour colour0 #blue
+#set-option -g display-panes-colour colour166 #orange
+
+# clock
+#set-window-option -g clock-mode-colour colour64 #green
+
+#set-window-option -g window-status-activity-attr bold
+#set-window-option -g window-status-activity-bg colour0
+#set-window-option -g window-status-activity-fg colour244
+###############Solarized end
